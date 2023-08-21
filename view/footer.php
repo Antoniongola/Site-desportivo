@@ -4,7 +4,7 @@
                 <a class="bg-white" href="#"><i class="icon ion-social-facebook"></i></a>
             </div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a class="text-white" href="destaques.html">Inicio</a></li>
+                <li class="list-inline-item"><a class="text-white" href="homepage.php">Inicio</a></li>
                 <li class="list-inline-item"><a class="text-white" href="contacte_nos.php">Contacte-nos</a></li>
                 <li class="list-inline-item"><a class="text-white" href="noticias.php">Notícias</a></li>
             </ul>

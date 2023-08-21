@@ -41,7 +41,7 @@ class KissengoController {
             if ($senha === '1234') {
                 $_SESSION['logado'] = 'sim';
                 session_start();
-                header('location: ../index.php');
+                header('location: homepage.php');
             } else {
                 echo "<script> alert('SENHA INVÁLIDA'); </script>";
             }
@@ -132,11 +132,11 @@ class KissengoController {
         }
     }
 
-    public function contacte($email, $name, $message) {
-        //if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            //$email = filter_input(INPUT_POST, 'email');
-            //$name = filter_input(INPUT_POST, 'name');
-            //$message = filter_input(INPUT_POST, 'message');
+    public function contacte() {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $email = filter_input(INPUT_POST, 'email');
+            $name = filter_input(INPUT_POST, 'nome');
+            $message = filter_input(INPUT_POST, 'message');
             $mail = new PHPMailer(true);
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
@@ -152,7 +152,7 @@ class KissengoController {
             $mail->Body = $message;
             $mail->send();
             echo "<script> alert('Email enviado com sucesso'); </script>";
-        //}
+        }
     }
 
     public function tituloDaPaginaDinamica($id){

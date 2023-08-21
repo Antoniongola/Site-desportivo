@@ -1,5 +1,9 @@
 <title>Contacte-nos</title>
-<?php include_once 'header.php' ?>
+<?php include_once 'header.php';
+include_once '../controller/kissengocontroller.php';
+$controller = new KissengoController();
+$controller->contacte();
+?>
 <section class="bg-white contact-clean">
     <form class="bg-light" method="post">
         <h2 class="text-center">Contacte-nos</h2>

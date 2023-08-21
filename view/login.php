@@ -2,7 +2,7 @@
 <?php include_once 'header.php'; 
 include_once '../controller/kissengocontroller.php';
 $controlador = new KissengoController();
-session_destroy();
+//session_destroy();
 $controlador->login();
 ?>
     <section class="bg-white login-clean">
