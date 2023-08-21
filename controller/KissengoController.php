@@ -28,11 +28,19 @@ class KissengoController {
         $this->servico = new PublicacaoService();
     }
 
-    public function login($email, $senha) {
-        if ($email == 'admin@hotmail.com') {
-            if ($senha == '1234') {
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $email = filter_input(INPUT_POST, 'email');
+            $senha = filter_input(INPUT_POST, 'password');
+            $this->validarLogin($email, $senha);
+        }
+    }
+    
+    public function validarLogin($email, $senha){
+        if ($email === 'admin@hotmail.com') {
+            if ($senha === '1234') {
+                $_SESSION['logado'] = 'sim';
                 session_start();
-                $_SESSION['admin'];
                 header('location: ../index.php');
             } else {
                 echo "<script> alert('SENHA INVÁLIDA'); </script>";

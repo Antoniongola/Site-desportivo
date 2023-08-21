@@ -1,5 +1,7 @@
 <title>Nova publicação</title>
-<?php include_once 'header.php';
+<?php 
+include_once 'header.php';
+session_start();
     if(!isset($_SESSION['logado'])) {
        header('location: ../index.php');
    }

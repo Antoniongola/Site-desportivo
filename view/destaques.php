@@ -1,3 +1,7 @@
+<?php 
+include_once '../controller/kissengocontroller.php';
+
+?>
 <div class="card">
     <div class="card-body" style="text-align: center;">
         <h4 class="text-center card-title">
@@ -46,12 +50,14 @@
                 </li>
             </ol>
         </div>
-        <button class="btn btn-primary text-center" type="submit">
-            Trocar Destaque
-        </button>
-        <button class="btn btn-danger" type="button" style="margin: 10px;padding: 6px 12px;">
-            Remover Destaque
-        </button>
+        <?php if(isset($_SESSION['logado'])){ ?>
+            <button class="btn btn-primary text-center" type="submit">
+                Trocar Destaque
+            </button>
+            <button class="btn btn-danger" type="button" style="margin: 10px;padding: 6px 12px;">
+                Remover Destaque
+            </button>
+        <?php } ?>
     </div>
 </div>
 <div>

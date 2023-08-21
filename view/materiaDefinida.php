@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once '../controller/kissengocontroller.php';
     $controlador = new KissengoController();
     echo '<title>'.$controlador->tituloDaPaginaDinamica($_SESSION['idDaMateriaEscolhida']).'</title>';

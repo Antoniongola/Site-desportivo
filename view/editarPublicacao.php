@@ -1,5 +1,6 @@
 <title>Editar publicação</title>
 <?php
+session_start();
 include_once 'header.php';
 if (!isset($_SESSION['logado'])) {
     header('location: ../index.php');

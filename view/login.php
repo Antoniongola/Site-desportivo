@@ -1,5 +1,10 @@
 <title>Login</title>
-<?php include_once 'header.php'; ?>
+<?php include_once 'header.php'; 
+include_once '../controller/kissengocontroller.php';
+$controlador = new KissengoController();
+session_destroy();
+$controlador->login();
+?>
     <section class="bg-white login-clean">
         <form class="bg-light" method="post">
             <h2 class="sr-only">Login Form</h2>

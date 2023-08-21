@@ -1,3 +1,7 @@
+<?php 
+include_once '../controller/kissengocontroller.php';
+
+?>
 <section class="projects-clean">
     <div class="container">
         <div class="intro">
@@ -11,14 +15,16 @@
                 <h3 class="name">
                     Project Name
                 </h3>
-                <button class="btn btn-success" type="submit" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
-                    Editar publicação
-                </button>
-                <button class="btn btn-danger" type="button" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
-                    Apagar publicação
-                </button>
+                <?php if(isset($_SESSION['logado'])){ ?>
+                    <button class="btn btn-success" type="submit" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
+                        Editar publicação
+                    </button>
+                    <button class="btn btn-danger" type="button" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
+                        Apagar publicação
+                    </button>
+                <?php } ?>
             </div>
-            <div class="col-sm-6 col-lg-4 item">
+            <!-- <div class="col-sm-6 col-lg-4 item">
                 <img class="img-fluid" src="../assets/img/building.jpg">
                 <h3 class="name">
                     Project Name
@@ -35,7 +41,7 @@
                 <h3 class="name">
                     Project Name
                 </h3>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>

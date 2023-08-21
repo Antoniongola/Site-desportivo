@@ -26,6 +26,10 @@
                         <span class="navbar-text actions">
                             <a class="btn btn-light action-button" role="button" href="login.php">Login</a>
                         </span>
+                    <?php }else{ ?>
+                        <span class="navbar-text actions">
+                            <a class="btn btn-light action-button" role="button" href="logout.php">Sair</a>
+                        </span>
                     <?php } ?>
                 </div>
             </div>
