@@ -24,6 +24,10 @@ class Publicacao {
         $this->imagem = $imagem;
     }
     
+    function getId() {
+        return $this->id;
+    }
+
     function getTitulo() {
         return $this->titulo;
     }

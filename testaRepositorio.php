@@ -16,6 +16,6 @@ $html = "<!DOCTYPE html>
     <p>$content</p>
 </body>
 </html>";
-$controller->contacte("20200446@isptec.co.ao", "ngola jr", "testando os serviços do website de notícias");
+var_dump($controller->selecionarPublicacaoPeloId(1)->getImagem());
 //Essa cena tá criar bem o ficheiro
 //$controller->criarFicheiro("Manchester United perde pro Tottenham Hotspurs", $html);

@@ -160,6 +160,14 @@ class KissengoController {
         return $pub->getTitulo();
     }
     
+    public function selecionarPublicacaoPeloId($id){
+        return $this->servico->selecionarPublicacaoPeloId($id);
+    }
+    
+    public function selecionarTodasPublicacoes(){
+        return $this->servico->selecionarTodasPublicacoes();
+    }
+    
     public function addHeader() {
         return;
     }

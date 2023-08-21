@@ -13,8 +13,17 @@ include_once 'header.php';
             <div class="col">
                 <div class="row text-center">
                     <div class="col">
-                        <img class="img-fluid" src="../assets/img/desk.jpg">
-                        <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit<br>&nbsp;<br>
+                        <img class="img-fluid" src="../ficheiros/imagens/<?php echo $controlador->selecionarPublicacaoPeloId($_SESSION['idDaMateriaEscolhida'])->getImagem(); ?>">
+                        <div class="row text-center">
+                            <div class="col">
+                                <h1>
+                                    <h1>
+                                        <?php echo $controlador->selecionarPublicacaoPeloId($_SESSION['idDaMateriaEscolhida'])->getTitulo(); ?>
+                                    </h1>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="description">
                         </p>
                     </div>
                 </div>
@@ -52,20 +61,26 @@ include_once 'header.php';
                 <h1>
                     Outras notícias
                 </h1>
-                <div class="row">
-                    <div class="col">
-                        <img class="img-fluid" src="../assets/img/desk.jpg" style="margin-top: 12px;">
-                        <h3 class="name">
-                            Project Name
-                        </h3>
-                        <button class="btn btn-success" type="submit" style="margin-bottom: 12px;margin-right: 12px;">
-                            Editar
-                        </button>
-                        <button class="btn btn-danger" type="button" style="margin-bottom: 12px;">
-                            Apagar
-                        </button>
-                    </div>
-                </div>
+                <?php foreach ($controlador->selecionarTodasPublicacoes() as $publicacao) { ?>
+                    <?php if($publicacao->getId() !== $_SESSION['idDaMateriaEscolhida']){?>
+                        <div class="row">
+                            <div class="col">
+                                <img class="img-fluid" src="../ficheiros/imagens/<?php echo $publicacao->getImagem(); ?>" style="margin-top: 12px;">
+                                <h3 class="name">
+                                    <?php echo $publicacao->getTitulo(); ?>
+                                </h3>
+                                <?php if(isset($_SESSION['logado'])){ ?>
+                                    <button class="btn btn-success" type="submit" style="margin-bottom: 12px;margin-right: 12px;">
+                                        Editar
+                                    </button>
+                                    <button class="btn btn-danger" type="button" style="margin-bottom: 12px;">
+                                        Apagar
+                                    </button>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
             </div>
         </div>
     </div>

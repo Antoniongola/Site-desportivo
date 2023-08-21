@@ -39,4 +39,12 @@ class PublicacaoService implements PublicacaoServiceI{
         } catch (PDOException $e) {
         }
     }
+    
+    public function selecionarTodasPublicacoes(){
+        try {
+            $res = $this->repository->selectAll();
+            return $res;
+        } catch (PDOException $e) {
+        }
+    }
 }
