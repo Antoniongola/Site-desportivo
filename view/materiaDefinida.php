@@ -1,8 +1,13 @@
 <?php
     session_start();
     include_once '../controller/kissengocontroller.php';
+    include_once '../controller/comentariocontroller.php';
     $controlador = new KissengoController();
+    $comentarioController = new ComentarioController();
     echo '<title>'.$controlador->tituloDaPaginaDinamica($_SESSION['idDaMateriaEscolhida']).'</title>';
+    //$comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
+    
+    
 ?>
 <?php
 include_once 'header.php'; 
@@ -24,13 +29,14 @@ include_once 'header.php';
                             </div>
                         </div>
                         <p class="description">
+                            <?php echo $controlador->selecionarPublicacaoPeloId($_SESSION['idDaMateriaEscolhida'])->getDescricao(); ?>
                         </p>
                     </div>
                 </div>
                 <div class="row text-center">
                     <div class="col">
                         <h1>
-                            Comentários (0)
+                            Comentários (<?php echo($comentarioController->quantidadeDeComentarios($_SESSION['idDaMateriaEscolhida'])); ?>)
                         </h1>
                     </div>
                 </div>
@@ -49,8 +55,8 @@ include_once 'header.php';
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit">
-                                    Enviar
+                                <button class="btn btn-primary" type="submit" onclick="<?php $comentarioController->fazerComentario(); ?>">
+                                    Enviar comentário
                                 </button>
                             </div>
                         </form>

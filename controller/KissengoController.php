@@ -23,7 +23,6 @@ require '/xampp/htdocs/kissengonews/PHPMailer/src/SMTP.php';
 class KissengoController {
 
     private $servico = NULL;
-
     function __construct() {
         $this->servico = new PublicacaoService();
     }
@@ -73,7 +72,6 @@ class KissengoController {
             $titulo = filter_input(INPUT_POST, 'titulo');
             $descricao = filter_input(INPUT_POST, 'descricao');
             $imagem = filter_input(INPUT_POST, 'imagem');
-
             $file = $_FILES['imagem'];
             $file_name = $file['name'];
             $tmp_name = $file['tmp_name'];
@@ -101,7 +99,6 @@ class KissengoController {
     public function apagarDestaque(){
         
     }
-
 
     public function criarFicheiro($titulo, $html){
         $pagina = str_replace(" ", "-", $titulo); //aqui estou a criar um arquivo pra nova publicação
@@ -166,13 +163,5 @@ class KissengoController {
     
     public function selecionarTodasPublicacoes(){
         return $this->servico->selecionarTodasPublicacoes();
-    }
-    
-    public function addHeader() {
-        return;
-    }
-
-    public function addFooter() {
-        return;
     }
 }
