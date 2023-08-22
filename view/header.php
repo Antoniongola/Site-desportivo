@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../assets/css/styles.min.css">
     </head>
     <body>
-        <nav class="navbar navbar-light navbar-expand-md fixed-top bg-secondary navigation-clean-button">
+        <nav class="navbar navbar-light navbar-expand-md bg-secondary navigation-clean-button">
             <div class="container">
                 <a class="navbar-brand" href="homepage.php">Lucas Cláudio</a>
                 <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-2"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -21,14 +21,14 @@
                         <?php } ?>
                     </ul><i class="fa fa-search flex-grow-0" style="width: 22.8594px;height: 14px;margin: 0px;"></i>
                     <input type="search">
-                    <button class="btn btn-primary" type="submit">Pesquisar</button>
+                    <button class="btn btn-primary" type="submit" style="margin-left: 12px;margin-right: 12px;">Pesquisar</button>
                     <?php if(!isset($_SESSION['logado'])){ ?>
                         <span class="navbar-text actions">
                             <a class="btn btn-light action-button" role="button" href="login.php">Login</a>
                         </span>
                     <?php }else{ ?>
                         <span class="navbar-text actions">
-                            <a class="btn btn-light action-button" role="button" href="logout.php">Sair</a>
+                            <a class="btn btn-light action-button"  role="button" href="logout.php" >Sair</a>
                         </span>
                     <?php } ?>
                 </div>

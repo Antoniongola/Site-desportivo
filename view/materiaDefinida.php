@@ -5,9 +5,7 @@
     $controlador = new KissengoController();
     $comentarioController = new ComentarioController();
     echo '<title>'.$controlador->tituloDaPaginaDinamica($_SESSION['idDaMateriaEscolhida']).'</title>';
-    //$comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
-    
-    
+    $comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
 ?>
 <?php
 include_once 'header.php'; 
@@ -40,6 +38,8 @@ include_once 'header.php';
                         </h1>
                     </div>
                 </div>
+                <br>
+                <br>
                 <div class="row">
                     <div class="col">
                         <form class="bg-light" method="post">
@@ -73,7 +73,7 @@ include_once 'header.php';
                             <div class="col">
                                 <img class="img-fluid" src="../ficheiros/imagens/<?php echo $publicacao->getImagem(); ?>" style="margin-top: 12px;">
                                 <h3 class="name">
-                                    <?php echo $publicacao->getTitulo(); ?>
+                                    <a href="materiaDefinida.php"><?php echo $publicacao->getTitulo(); ?></a>
                                 </h3>
                                 <?php if(isset($_SESSION['logado'])){ ?>
                                     <button class="btn btn-success" type="submit" style="margin-bottom: 12px;margin-right: 12px;">

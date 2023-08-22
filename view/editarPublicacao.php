@@ -18,16 +18,16 @@ if (!isset($_SESSION['logado'])) {
                 </h1>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Insira o título da noticia" required="">
+                <input class="form-control" name="titulo" type="text" placeholder="Insira o título da noticia" required="">
             </div>
-            <textarea class="form-control" placeholder="Insira a descrição da mesma notícia" required="">
+            <textarea class="form-control" name="descricao" placeholder="Insira a descrição da mesma notícia" required="">
                     
             </textarea>
             <span style="margin-top: 7px;">
                 Escolha a imagem para a notícia
             </span>
             <div class="form-group">
-                <input class="form-control-file" type="file" required="" accept="image/*" style="margin-top: 7px;">
+                <input class="form-control-file" name="imagem" type="file" required="" accept="image/*" style="margin-top: 7px;">
             </div>
             <div class="form-group justify-content-center align-items-center align-content-center" style="text-align: center;">
                 <button class="btn btn-primary btn-lg text-center border rounded-pill" type="submit">

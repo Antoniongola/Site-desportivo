@@ -1,6 +1,5 @@
 <?php 
 include_once '../controller/kissengocontroller.php';
-
 ?>
 <div class="card">
     <div class="card-body" style="text-align: center;">

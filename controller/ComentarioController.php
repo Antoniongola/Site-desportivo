@@ -21,11 +21,11 @@ class ComentarioController {
         $this->comentarioS = new ComentarioService();
     }
     
-    public function fazerComentario(){
+    public function fazerComentario($fk_publicacao){
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $comentario = filter_input(INPUT_POST, 'comentario');
             $name = filter_input(INPUT_POST, 'nome');
-            $this->comentarioS->comentar($fk_publicacao, $comentario, $nome);
+            $this->comentarioS->comentar($fk_publicacao, $comentario, $name);
             echo "<script> alert('Comentário feito com sucesso'); </script>";
         }
     }

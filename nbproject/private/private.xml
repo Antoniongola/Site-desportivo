@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/KissengoNews/view/contacte_nos.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/model/ComentarioRepository.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/view/noticias.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/view/criarPublicacao.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/view/editarPublicacao.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/model/PublicacaoRepository.php</file>
             <file>file:/C:/xampp/htdocs/KissengoNews/view/homepage.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/model/ComentarioServiceI.php</file>
             <file>file:/C:/xampp/htdocs/KissengoNews/controller/ComentarioController.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/controller/KissengoController.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/view/destaques.php</file>
-            <file>file:/C:/xampp/htdocs/KissengoNews/model/ComentarioService.php</file>
+            <file>file:/C:/xampp/htdocs/KissengoNews/view/contacte_nos.php</file>
+            <file>file:/C:/xampp/htdocs/KissengoNews/view/criarPublicacao.php</file>
+            <file>file:/C:/xampp/htdocs/KissengoNews/view/footer.php</file>
+            <file>file:/C:/xampp/htdocs/KissengoNews/view/editarPublicacao.php</file>
+            <file>file:/C:/xampp/htdocs/KissengoNews/testaRepositorio.php</file>
             <file>file:/C:/xampp/htdocs/KissengoNews/view/materiaDefinida.php</file>
         </group>
     </open-files>

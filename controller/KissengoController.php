@@ -36,10 +36,9 @@ class KissengoController {
     }
     
     public function validarLogin($email, $senha){
-        if ($email === 'admin@hotmail.com') {
-            if ($senha === '1234') {
+        if ($email === 'kissengonews@gmail.com') {
+            if ($senha === 'lucasclaudio') {
                 $_SESSION['logado'] = 'sim';
-                session_start();
                 header('location: homepage.php');
             } else {
                 echo "<script> alert('SENHA INVÁLIDA'); </script>";
@@ -60,10 +59,9 @@ class KissengoController {
             $tmp_name = $file['tmp_name'];
             $path = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/ficheiros/imagens/';
             move_uploaded_file($tmp_name, $path . $file_name); //aqui meti a imagem da publicação numa pasta.
-
             
-            $this->criarFicheiro($titulo, $html);
-            $this->servico->criarPublicacao($titulo, $descricao, $imagem);
+            $this->servico->criarPublicacao($titulo, $descricao, $file_name);
+            echo "<script> alert('PUBLICAÇÃO ADICIONADA COM SUCESSO AO SITE'); </script>";
         }
     }
 

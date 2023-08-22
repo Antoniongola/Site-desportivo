@@ -1,5 +1,7 @@
-<title>Contacte-nos</title>
-<?php include_once 'header.php';
+<?php 
+session_start();
+echo '<title>Contacte-nos</title>';
+include_once 'header.php';
 include_once '../controller/kissengocontroller.php';
 $controller = new KissengoController();
 $controller->contacte();
