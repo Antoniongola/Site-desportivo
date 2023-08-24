@@ -17,12 +17,12 @@ class DestaquesService implements DestaquesServiceI{
     private $repository = NULL;
     
     public function __construct() {
-        $this->repository = new DestaquesService();
+        $this->repository = new DestaquesRepository();
     }
     
     public function apagarDestaque($id) {
         try {
-            $res = $this->repository->apagarDestaque($id);
+            $res = $this->repository->apagarPeloId($id);
             return $res;
         } catch (PDOException $e) {
         }
@@ -30,7 +30,7 @@ class DestaquesService implements DestaquesServiceI{
 
     public function inserirDestaque($fk_publicacao) {
         try {
-            $res = $this->repository->inserirDestaque($fk_publicacao);
+            $res = $this->repository->insert($fk_publicacao);
             return $res;
         } catch (PDOException $e) {
         }
@@ -38,6 +38,13 @@ class DestaquesService implements DestaquesServiceI{
 
     public function trocarDestaque($idDaNovaPublicacao) {
         
+    }
+    
+    public function selecionarTodosDestaques(){
+        try{
+            return $this->repository->selecionarTodos();
+        } catch (PDOException $e) {
+        }
     }
 
 }

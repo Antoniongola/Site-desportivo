@@ -1,5 +1,8 @@
-<?php 
+<?php
 include_once '../controller/kissengocontroller.php';
+include_once '../model/destaques.php';
+$controlador = new KissengoController();
+$contador = 0;
 ?>
 <div class="card">
     <div class="card-body" style="text-align: center;">
@@ -9,20 +12,38 @@ include_once '../controller/kissengocontroller.php';
         <div class="carousel slide" data-ride="carousel" id="carousel-1">
             <!-- parte onde metemos as imagens -->
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100 d-block" src="../assets/img/building.jpg" alt="Slide Image">
-                </div>
-                <div class="carousel-item">
-                    <img class="w-100 d-block" src="../assets/img/desk.jpg" alt="Slide Image">
-                </div>
-                <div class="carousel-item">
-                    <img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image">
-                </div>
+                <?php foreach ($controlador->todosDestaques() as $destaques) { ?>
+                    <?php if($contador === 0){ ?> 
+                        <div class="carousel-item active">
+                    <?php } ?>
+                    <?php if($contador !== 0){ ?>
+                        <div class="carousel-item">
+                    <?php } ?>
+                        <a role="button" href="materiaDefinida.php?id=<?php echo $destaques->getId(); ?>">
+                            <img class="w-100 d-block" src="../ficheiros/imagens/<?php echo $destaques->getImagem(); ?>" alt="Slide Image">
+                            <h3><?php echo $destaques->getTitulo(); ?></h3>
+                        </a>
+                        <br>
+                        <?php if(isset($_SESSION['logado'])){ ?>
+                            <div>
+                                <a href="removerDestaque.php?id=<?php echo $destaques->getIdDestaques(); ?>">
+                                    <button class="btn btn-primary text-center" type="submit">
+                                        Remover destaque
+                                    </button>
+                                </a>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php $contador++; } ?>
+                <?php if (isset($_SESSION['logado'])) { ?>
+                    <div class="carousel-item">
+                        <img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image">
+                    </div>
+                <?php } ?>
             </div>
             <div>
                 <a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon">
-                        
                     </span>
                     <span class="sr-only">
                         Previous
@@ -30,7 +51,7 @@ include_once '../controller/kissengocontroller.php';
                 </a>
                 <a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next">
                     <span class="carousel-control-next-icon">
-                        
+
                     </span>
                     <span class="sr-only">
                         Next
@@ -39,26 +60,16 @@ include_once '../controller/kissengocontroller.php';
             </div>
             <ol class="carousel-indicators">
                 <li data-target="#carousel-1" data-slide-to="0" class="active">
-                    
+
                 </li> 
-                <li data-target="#carousel-1" data-slide-to="1">
-                    
-                </li>
-                <li data-target="#carousel-1" data-slide-to="2">
-                    
-                </li>
+                <?php for($contador = 1; $contador < count($controlador->todosDestaques()); $contador++){?>
+                    <li data-target="#carousel-1" data-slide-to="<?php echo $contador ?>">
+                    </li>
+                <?php } ?>
             </ol>
         </div>
-        <?php if(isset($_SESSION['logado'])){ ?>
-            <button class="btn btn-primary text-center" type="submit">
-                Trocar Destaque
-            </button>
-            <button class="btn btn-danger" type="button" style="margin: 10px;padding: 6px 12px;">
-                Remover Destaque
-            </button>
-        <?php } ?>
     </div>
 </div>
 <div>
-    
+
 </div>

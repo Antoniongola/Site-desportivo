@@ -11,16 +11,22 @@
  * @author Ngola
  */
 class Comentario {
+    private $id;
     private $fk_publicacao;
     private $comentario;
     private $autor;
     
-    function __construct($fk_publicacao, $comentario, $autor) {
+    function __construct($id, $fk_publicacao, $comentario, $autor) {
+        $this->id = $id;
         $this->fk_publicacao = $fk_publicacao;
         $this->comentario = $comentario;
         $this->autor = $autor;
     }
     
+    function getId() {
+        return $this->id;
+    }
+
     function getAutor() {
         return $this->autor;
     }

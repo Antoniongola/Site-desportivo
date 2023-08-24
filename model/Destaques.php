@@ -13,17 +13,17 @@
  */
 include_once '/xampp/htdocs/kissengonews/model/publicacao.php';
 class Destaques extends publicacao{
-    private $id;
-    private $fk_publicacao;
+    private $idDestaque;
+    //private $fk_publicacao;
     
     function __construct($id, $fk_publicacao,$titulo, $descricao, $imagem) {
         parent::__construct($fk_publicacao, $titulo, $descricao, $imagem);
-        $this->id = $id;
-        $this->fk_publicacao = $fk_publicacao;
+        $this->idDestaque = $id;
+        //$this->fk_publicacao = $fk_publicacao;
     }
 
     function getIdDestaques() {
-        return $this->id;
+        return $this->idDestaque;
     }
 
     function setIdDestaques($id): void {

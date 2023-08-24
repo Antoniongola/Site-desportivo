@@ -13,9 +13,11 @@
  */
 require_once '/xampp/htdocs/kissengonews/model/dbconnection.php';
 require_once '/xampp/htdocs/kissengonews/model/destaques.php';
+
 class DestaquesRepository {
+
     private $db;
-    
+
     function __construct() {
         $this->db = DbConnection::getInstance();
     }
@@ -31,7 +33,7 @@ class DestaquesRepository {
             return false;
         }
     }
-    
+
     public function apagarPeloId($id) {
         try {
             $stmt = $this->db->prepare("DELETE FROM destaques WHERE id=:id");
@@ -43,4 +45,17 @@ class DestaquesRepository {
             return false;
         }
     }
+
+    public function selecionarTodos() {
+        $destaques = Array();
+        $stmt = $this->db->prepare("SELECT destaques.*, publicacao.titulo, publicacao.descricao, publicacao.imagem FROM destaques JOIN publicacao ON destaques.fk_publicacao = publicacao.id");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        foreach ($result as $destaque) {
+            $destaques[] = new Destaques($destaque['id'], $destaque['fk_publicacao'], $destaque['titulo'], $destaque['descricao'], $destaque['imagem']);
+        }
+
+        return $destaques;
+    }
+
 }

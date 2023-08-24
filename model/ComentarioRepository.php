@@ -43,7 +43,7 @@ class ComentarioRepository {
         $result = $stmt->fetchAll();
 
         foreach ($result as $comentario) {
-            $comentarios[] = new Comentario($comentario['fk_publicacao'], $comentario['comentario'], $comentario['autor']);
+            $comentarios[] = new Comentario($comentario['id'] ,$comentario['fk_publicacao'], $comentario['comentario'], $comentario['autor']);
         }
         
         return $comentarios;

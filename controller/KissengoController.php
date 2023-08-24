@@ -12,6 +12,7 @@
  * @author Ngola
  */
 include_once '/xampp/htdocs/kissengonews/model/publicacaoservice.php';
+include_once '/xampp/htdocs/kissengonews/model/destaquesservice.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -23,8 +24,10 @@ require '/xampp/htdocs/kissengonews/PHPMailer/src/SMTP.php';
 class KissengoController {
 
     private $servico = NULL;
+    private $destaques = NULL;
     function __construct() {
         $this->servico = new PublicacaoService();
+        $this->destaques = new DestaquesService();
     }
 
     public function login() {
@@ -65,7 +68,7 @@ class KissengoController {
         }
     }
 
-    public function editarPublicacao($id, $title) {
+    public function editarPublicacao($id) {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $titulo = filter_input(INPUT_POST, 'titulo');
             $descricao = filter_input(INPUT_POST, 'descricao');
@@ -87,15 +90,19 @@ class KissengoController {
     }
     
     public function novoDestaque(){
-        
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $id = filter_input(INPUT_POST, 'destaque');
+            $this->destaques->inserirDestaque($id);
+            echo "<script> alert('DESTAQUE ADICIONADO COM SUCESSO AO SITE!'); </script>";
+        }
     }
     
-    public function trocarDestaque(){
-        
+    public function todosDestaques(){
+        return $this->destaques->selecionarTodosDestaques();
     }
     
-    public function apagarDestaque(){
-        
+    public function apagarDestaque($id){
+        $this->destaques->apagarDestaque($id);
     }
 
     public function criarFicheiro($titulo, $html){
@@ -112,19 +119,9 @@ class KissengoController {
         file_put_contents($fileLocation, $conteudo);
     }
 
-    public function apagarPublicacao($id, $titulo) {
-        $pagina = str_replace(" ", "-", $titulo); //aqui estou a criar um arquivo pra nova publicação
-        $fileLocation = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/view/' . $pagina . '.php';
-        if (file_exists($fileLocation)) {
-            if (unlink($fileLocation)) {
-                echo "<script> alert('Publicacão apagada com sucesso!'); </script>";
-                $this->servico->apagarPublicacao($id);
-            } else {
-                echo "<script> alert('Erro ao apagar a página!'); </script>";
-            }
-        } else {
-            echo "<script> alert('Página inexistente!'); </script>";
-        }
+    public function apagarPublicacao($id) {
+        echo "<script> alert('Publicacão apagada com sucesso!'); </script>";
+        $this->servico->apagarPublicacao($id);
     }
 
     public function contacte() {

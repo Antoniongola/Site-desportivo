@@ -1,15 +1,15 @@
 <?php
 session_start();
-echo '<title>Editar publicação</title>';
+echo '<title>Adicionar destaque</title>';
 include_once 'header.php';
 include_once '../controller/kissengocontroller.php';
+$controlador = new KissengoController();
+$controlador->novoDestaque();
 
 if (!isset($_SESSION['logado'])) {
     header('location: ../index.php');
 }
-$controlador = new KissengoController();
-$id = filter_input(INPUT_GET, 'id');
-$pub = $controlador->selecionarPublicacaoPeloId($id);
+
 ?>
 <div class="card">
     <div class="card-body">
@@ -19,22 +19,21 @@ $pub = $controlador->selecionarPublicacaoPeloId($id);
         <form class="bg-light border rounded-0 justify-content-center align-content-center" method="post" style="margin-bottom: 36px;">
             <div class="form-group">
                 <h1 class="text-center">
-                    Editar publicação
+                    Adicionar destaque
                 </h1>
             </div>
             <div class="form-group">
-                <input class="form-control" name="titulo" type="text" value="<?php echo $pub->getTitulo(); ?>">
-            </div>
-            <textarea class="form-control" name="descricao"><?php echo $pub->getDescricao(); ?></textarea>
-            <span style="margin-top: 7px;">
-                Escolha a imagem para a notícia
-            </span>
-            <div class="form-group">
-                <input class="form-control-file" name="imagem" type="file" accept="image/*" style="margin-top: 7px;">
+                <label>Escolha uma notícia para destaque: </label>
+                <br>
+                <select name="destaque">
+                    <?php foreach ($controlador->selecionarTodasPublicacoes() as $publicacao) { ?>
+                        <option value="<?php echo $publicacao->getId(); ?>"> <?php echo $publicacao->getTitulo(); ?> </option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="form-group justify-content-center align-items-center align-content-center" style="text-align: center;">
                 <button class="btn btn-primary btn-lg text-center border rounded-pill" type="submit">
-                    Editar
+                    Adicionar destaque
                 </button>
             </div>
         </form>

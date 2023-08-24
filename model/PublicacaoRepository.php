@@ -24,7 +24,7 @@ class PublicacaoRepository {
     
     public function selectAll() {
         $publicacoes = Array();
-        $stmt = $this->db->prepare("SELECT * FROM publicacao");
+        $stmt = $this->db->prepare("SELECT * FROM publicacao ORDER BY id DESC");
         $stmt->execute();
         $result = $stmt->fetchAll();
 

@@ -23,9 +23,7 @@ $controlador->fazerPublicacao();
             <div class="form-group">
                 <input class="form-control" type="text" name="titulo" placeholder="Insira o título da noticia" required="">
             </div>
-            <textarea class="form-control" name="descricao" placeholder="Insira a descrição da mesma notícia" required="">
-                
-            </textarea>
+            <textarea class="form-control" name="descricao" placeholder="Insira a descrição da mesma notícia" required=""></textarea>
             <span style="margin-top: 7px;">
                 Escolha a imagem para a notícia
             </span>
