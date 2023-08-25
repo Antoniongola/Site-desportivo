@@ -1,5 +1,4 @@
 <?php
-session_start();
 echo '<title>Editar publicação</title>';
 include_once 'header.php';
 include_once '../controller/kissengocontroller.php';
@@ -10,13 +9,14 @@ if (!isset($_SESSION['logado'])) {
 $controlador = new KissengoController();
 $id = filter_input(INPUT_GET, 'id');
 $pub = $controlador->selecionarPublicacaoPeloId($id);
+$controlador->editarPublicacao($id);
 ?>
 <div class="card">
     <div class="card-body">
 
     </div>
     <div class="container" style="margin-bottom: 40px;">
-        <form class="bg-light border rounded-0 justify-content-center align-content-center" method="post" style="margin-bottom: 36px;">
+        <form class="bg-light border rounded-0 justify-content-center align-content-center" method="post" enctype="multipart/form-data" style="margin-bottom: 36px;">
             <div class="form-group">
                 <h1 class="text-center">
                     Editar publicação

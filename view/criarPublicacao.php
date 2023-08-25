@@ -1,10 +1,9 @@
 <?php 
-session_start();
+echo '<title>Nova publicação</title>';
+include_once 'header.php';
 if(!isset($_SESSION['logado'])) {
    header('location: ../index.php');
 }
-echo '<title>Nova publicação</title>';
-include_once 'header.php';
 include_once '../controller/kissengocontroller.php';
 $controlador = new KissengoController();
 $controlador->fazerPublicacao();

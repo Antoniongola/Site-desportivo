@@ -25,6 +25,7 @@ class KissengoController {
 
     private $servico = NULL;
     private $destaques = NULL;
+
     function __construct() {
         $this->servico = new PublicacaoService();
         $this->destaques = new DestaquesService();
@@ -37,8 +38,8 @@ class KissengoController {
             $this->validarLogin($email, $senha);
         }
     }
-    
-    public function validarLogin($email, $senha){
+
+    public function validarLogin($email, $senha) {
         if ($email === 'kissengonews@gmail.com') {
             if ($senha === 'lucasclaudio') {
                 $_SESSION['logado'] = 'sim';
@@ -62,7 +63,7 @@ class KissengoController {
             $tmp_name = $file['tmp_name'];
             $path = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/ficheiros/imagens/';
             move_uploaded_file($tmp_name, $path . $file_name); //aqui meti a imagem da publicação numa pasta.
-            
+
             $this->servico->criarPublicacao($titulo, $descricao, $file_name);
             echo "<script> alert('PUBLICAÇÃO ADICIONADA COM SUCESSO AO SITE'); </script>";
         }
@@ -73,45 +74,59 @@ class KissengoController {
             $titulo = filter_input(INPUT_POST, 'titulo');
             $descricao = filter_input(INPUT_POST, 'descricao');
             $imagem = filter_input(INPUT_POST, 'imagem');
-            $file = $_FILES['imagem'];
-            $file_name = $file['name'];
-            $tmp_name = $file['tmp_name'];
-            $path = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/ficheiros/imagens/';
-            move_uploaded_file($tmp_name, $path . $file_name);
-            $this->servico->editarPublicacao($id, $titulo, $descricao, $imagem);
-            if($title !== $titulo){
-                if (file_exists($fileLocation)) {
-                    $this->substituirFicheiro($fileLocation, $titulo);
-                }
-            }else{
-                
-            }
+            $this->validacaoEditarPublicacao($id, $titulo, $descricao, $imagem);
         }
     }
+
+    public function validacaoEditarPublicacao($id, $titulo, $descricao, $imagem) {
+        $file = $_FILES['imagem'];
+        $file_name = $file['name'];
+        $tmp_name = $file['tmp_name'];
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/ficheiros/imagens/';
+        $imagemAntiga = $this->selecionarPublicacaoPeloId($id)->getImagem();
+        if (file_exists($path.$imagemAntiga)) {
+            if ($file_name === "" || !isset($imagem) || $imagem === NULL) {
+                $this->servico->editarPublicacao($id, $titulo, $descricao, $imagemAntiga);
+                echo "<script> alert('PUBLICAÇÃO EDITADA COM SUCESSO, NENHUMA IMAGEM NOVA FOI ADICIONADA!'); </script>";
+            }else if ($file_name !== $imagemAntiga) {
+                unlink($path . $imagemAntiga);
+                move_uploaded_file($tmp_name, $path . $file_name);
+                $this->servico->editarPublicacao($id, $titulo, $descricao, $file_name);
+                echo "<script> alert('PUBLICAÇÃO EDITADA COM SUCESSO, NOVA IMAGEM ADICIONADA!'); </script>";
+            }
+        }else{
+            $this->servico->editarPublicacao($id, $titulo, $descricao, $file_name);
+            echo "<script> alert('PUBLICAÇÃO EDITADA COM SUCESSO, NENHUMA IMAGEM NOVA FOI ADICIONADA!'); </script>";
+        }
+    }
+
+    public function buscarPublicacoes($titulo){
+        return $this->servico->buscarPublicacoes($titulo);
+    }
     
-    public function novoDestaque(){
+    public function novoDestaque() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $id = filter_input(INPUT_POST, 'destaque');
             $this->destaques->inserirDestaque($id);
             echo "<script> alert('DESTAQUE ADICIONADO COM SUCESSO AO SITE!'); </script>";
         }
     }
-    
-    public function todosDestaques(){
+
+    public function todosDestaques() {
         return $this->destaques->selecionarTodosDestaques();
     }
-    
-    public function apagarDestaque($id){
+
+    public function apagarDestaque($id) {
         $this->destaques->apagarDestaque($id);
     }
 
-    public function criarFicheiro($titulo, $html){
+    public function criarFicheiro($titulo, $html) {
         $pagina = str_replace(" ", "-", $titulo); //aqui estou a criar um arquivo pra nova publicação
         $fileLocation = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/view/' . $pagina . '.php';
         file_put_contents($fileLocation, $html);
     }
-    
-    public function substituirFicheiro($fileLocation, $titulo){
+
+    public function substituirFicheiro($fileLocation, $titulo) {
         $conteudo = file_get_contents($fileLocation);
         unlink($fileLocation);
         $pagina = str_replace(" ", "-", $titulo); //aqui estou a criar um arquivo pra nova publicação
@@ -138,25 +153,26 @@ class KissengoController {
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
             $mail->setFrom('20200446@isptec.co.ao');
-            $mail->addAddress($email);
+            $mail->addAddress("kissengonews@gmail.com");
             $mail->isHTML(true);
-            $mail->Subject = "Nome:".$name . "; Email: $email. Feedback vindo do site desportivo!";
+            $mail->Subject = "Nome:" . $name . "; Email: $email. Feedback vindo do site desportivo!";
             $mail->Body = $message;
             $mail->send();
             echo "<script> alert('Email enviado com sucesso'); </script>";
         }
     }
 
-    public function tituloDaPaginaDinamica($id){
+    public function tituloDaPaginaDinamica($id) {
         $pub = $this->servico->selecionarPublicacaoPeloId($id);
         return $pub->getTitulo();
     }
-    
-    public function selecionarPublicacaoPeloId($id){
+
+    public function selecionarPublicacaoPeloId($id) {
         return $this->servico->selecionarPublicacaoPeloId($id);
     }
-    
-    public function selecionarTodasPublicacoes(){
+
+    public function selecionarTodasPublicacoes() {
         return $this->servico->selecionarTodasPublicacoes();
     }
+
 }

@@ -1,5 +1,4 @@
 <?php 
-session_start();
 echo '<title>Contacte-nos</title>';
 include_once 'header.php';
 include_once '../controller/kissengocontroller.php';

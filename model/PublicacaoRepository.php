@@ -69,4 +69,18 @@ class PublicacaoRepository {
             return false;
         }
     }
+    
+    public function buscarPublicacoes($item) {
+        $publicacoes = Array();
+        $stmt = $this->db->prepare("SELECT * FROM publicacao WHERE (titulo LIKE '%$item%') OR (descricao LIKE '%$item%') OR (imagem LIKE '%$item%') ORDER BY id DESC");
+        //$stmt->bindparam(":item", $item);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        foreach ($result as $publicacao) {
+            $publicacoes[] = new Publicacao($publicacao['id'], $publicacao['titulo'], $publicacao['descricao'], $publicacao['imagem']);
+        }
+        
+        return $publicacoes;
+    }
 }

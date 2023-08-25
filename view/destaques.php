@@ -20,7 +20,7 @@ $contador = 0;
                         <div class="carousel-item">
                     <?php } ?>
                         <a role="button" href="materiaDefinida.php?id=<?php echo $destaques->getId(); ?>">
-                            <img class="w-100 d-block" src="../ficheiros/imagens/<?php echo $destaques->getImagem(); ?>" alt="Slide Image">
+                            <img class="w-100 d-block fit"  src="../ficheiros/imagens/<?php echo $destaques->getImagem(); ?>" alt="Slide Image">
                             <h3><?php echo $destaques->getTitulo(); ?></h3>
                         </a>
                         <br>
@@ -35,11 +35,7 @@ $contador = 0;
                         <?php } ?>
                     </div>
                 <?php $contador++; } ?>
-                <?php if (isset($_SESSION['logado'])) { ?>
-                    <div class="carousel-item">
-                        <img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image">
-                    </div>
-                <?php } ?>
+                
             </div>
             <div>
                 <a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev">
@@ -63,7 +59,7 @@ $contador = 0;
 
                 </li> 
                 <?php for($contador = 1; $contador < count($controlador->todosDestaques()); $contador++){?>
-                    <li data-target="#carousel-1" data-slide-to="<?php echo $contador ?>">
+                    <li data-target="#carousel-1" data-slide-to="<?php echo $contador; ?>">
                     </li>
                 <?php } ?>
             </ol>

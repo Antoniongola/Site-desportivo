@@ -7,4 +7,4 @@ $controller = new KissengoController();
 //$comentario = new ComentarioController();
 //$comentario->fazerComentario(1, "Essa equipa já não tem soluçao", "Ngola jr");
 
-var_dump($controller->todosDestaques());
+var_dump($controller->buscarPublicacoes("greenwood"));

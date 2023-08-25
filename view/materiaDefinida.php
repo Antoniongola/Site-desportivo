@@ -1,18 +1,15 @@
 <?php
-session_start();
 include_once '../controller/kissengocontroller.php';
 include_once '../controller/comentariocontroller.php';
 $controlador = new KissengoController();
 $comentarioController = new ComentarioController();
 $id = filter_input(INPUT_GET, 'id');
 echo '<title>' . $controlador->tituloDaPaginaDinamica($id) . '</title>';
+include_once 'header.php';
 $comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
 ?>
-<?php
-include_once 'header.php';
-?>
 <section>
-    <div class="container text-center" style="margin: 0px;padding: 25px;text-align: center;">
+    <div class="container " style="margin: 0px;padding: 25px;">
         <div class="row">
             <div class="col">
                 <div class="row">
@@ -83,29 +80,35 @@ include_once 'header.php';
                 </div>
             </div>
             <div class="col-sm-7 col-lg-4 item">
-                <h1>
+                <h1 class="text-center">
                     Outras notícias
                 </h1>
-                <?php foreach ($controlador->selecionarTodasPublicacoes() as $publicacao) { ?>
-                    <?php if ($publicacao->getId() !== $id) { ?>
+                <?php foreach ($controlador->selecionarTodasPublicacoes() as $publicacao){ ?>
+                    <?php if ($publicacao->getId() !== $id){ ?>
                         <div class="row">
-                            <div class="col card">
-                                <img class="img-fluid" src="../ficheiros/imagens/<?php echo $publicacao->getImagem(); ?>" style="margin-top: 12px;">
-                                <h3 class="name">
-                                    <a href="materiaDefinida.php?id=<?php echo $publicacao->getId(); ?>"><?php echo $publicacao->getTitulo(); ?></a>
-                                </h3>
-                                <?php if (isset($_SESSION['logado'])) { ?>
-                                    <a href="editarPublicacao.php?id=<?php echo $publicacao->getId(); ?>" >
-                                        <button class="btn btn-success" onclick="<?php header('location: editarPublicacao.php'); ?>" type="submit" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
-                                            Editar publicação
-                                        </button>
-                                    </a>
-                                    <a href="apagarPub.php?id=<?php echo $publicacao->getId(); ?>" >
-                                        <button class="btn btn-danger" type="button" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
-                                            Apagar publicação
-                                        </button>
-                                    </a>
-                                <?php } ?>
+                            <div class="col bg-light card">
+                                <div class="card-img">
+                                    <img class="img-fluid" src="../ficheiros/imagens/<?php echo $publicacao->getImagem(); ?>" style="margin-top: 12px;">
+                                </div>
+                                <div class="card-title text-center">
+                                    <h3 class="name">
+                                        <a href="materiaDefinida.php?id=<?php echo $publicacao->getId(); ?>"><?php echo $publicacao->getTitulo(); ?></a>
+                                    </h3>
+                                </div>
+                                <div class="">
+                                    <?php if (isset($_SESSION['logado'])){ ?>
+                                        <a href="editarPublicacao.php?id=<?php echo $publicacao->getId(); ?>" >
+                                            <button class="btn btn-success" onclick="<?php header('location: editarPublicacao.php'); ?>" type="submit" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
+                                                Editar publicação
+                                            </button>
+                                        </a>
+                                        <a href="apagarPub.php?id=<?php echo $publicacao->getId(); ?>" >
+                                            <button class="btn btn-danger" type="button" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
+                                                Apagar publicação
+                                            </button>
+                                        </a>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     <?php } ?>

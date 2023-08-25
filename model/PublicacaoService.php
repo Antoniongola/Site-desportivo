@@ -47,4 +47,12 @@ class PublicacaoService implements PublicacaoServiceI{
         } catch (PDOException $e) {
         }
     }
+    
+    public function buscarPublicacoes($titulo) {
+        try {
+            $res = $this->repository->buscarPublicacoes($titulo);
+            return $res;
+        } catch (PDOException $e) {
+        }
+    }
 }

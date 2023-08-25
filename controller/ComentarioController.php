@@ -12,13 +12,22 @@
  * @author Ngola
  */
 include_once '/xampp/htdocs/kissengonews/model/comentarioservice.php';
+include_once '/xampp/htdocs/kissengonews/model/publicacaoservice.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once '/xampp/htdocs/kissengonews/PHPMailer/src/Exception.php';
+require_once '/xampp/htdocs/kissengonews/PHPMailer/src/PHPMailer.php';
+require_once '/xampp/htdocs/kissengonews/PHPMailer/src/SMTP.php';
 
 class ComentarioController {
     //put your code here
     
     private $comentarioS = NULL;
+    private $publicacaoS = NULL;
     function __construct() {
         $this->comentarioS = new ComentarioService();
+        $this->PublicacaoS = new PublicacaoService();
     }
     
     public function fazerComentario($fk_publicacao){
@@ -26,7 +35,21 @@ class ComentarioController {
             $comentario = filter_input(INPUT_POST, 'comentario');
             $name = filter_input(INPUT_POST, 'nome');
             $this->comentarioS->comentar($fk_publicacao, $comentario, $name);
-            echo "<script> alert('Comentário feito com sucesso'); </script>";
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = '20200446@isptec.co.ao';
+            $mail->Password = 'Fatima1$';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            $mail->setFrom('20200446@isptec.co.ao');
+            $mail->addAddress("kissengonews@gmail.com");
+            $mail->isHTML(true);
+            $mail->Subject ='Comentário do(a) '. $name. 'na publicação: ';
+            $mail->Body = $comentario;
+            $mail->send();
+            echo "<script> alert('Comentário adicionado com sucesso!'); </script>";
         }
     }
     
