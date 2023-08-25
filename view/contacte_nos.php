@@ -15,9 +15,7 @@ $controller->contacte();
             <input class="form-control" type="text" name="email" placeholder="Seu email para que o respondamos" inputmode="email">
         </div>
         <div class="form-group">
-            <textarea class="form-control" name="message" placeholder="A sua mensagem para a nossa equipa" rows="14">
-                
-            </textarea>
+            <textarea class="form-control" name="message" placeholder="A sua mensagem para a nossa equipa" rows="14"></textarea>
         </div>
         <div class="form-group text-center">
             <button class="btn btn-primary" type="submit">
