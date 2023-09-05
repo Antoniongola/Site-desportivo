@@ -1,7 +1,8 @@
 <?php
-echo '<title>Adicionar destaque</title>';
+session_start();
 include_once 'header.php';
-include_once '../controller/kissengocontroller.php';
+echo '<title>Adicionar destaque</title>';
+include_once '../controller/KissengoController.php';
 $controlador = new KissengoController();
 $controlador->novoDestaque();
 

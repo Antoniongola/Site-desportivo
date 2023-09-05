@@ -1,4 +1,4 @@
-   <?php
+<?php
 class DbConnection {
 
     private static $instance = NULL;

@@ -11,7 +11,7 @@
  *
  * @author Ngola
  */
-include_once '/xampp/htdocs/kissengonews/model/publicacao.php';
+include_once 'Publicacao.php';
 class Destaques extends publicacao{
     private $idDestaque;
     //private $fk_publicacao;

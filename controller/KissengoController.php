@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,24 +10,26 @@
  *
  * @author Ngola
  */
-include_once '/xampp/htdocs/kissengonews/model/publicacaoservice.php';
-include_once '/xampp/htdocs/kissengonews/model/destaquesservice.php';
+include_once '../model/PublicacaoService.php';
+include_once '../model/DestaquesService.php';
+include_once 'ComentarioController.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '/xampp/htdocs/kissengonews/PHPMailer/src/Exception.php';
-require '/xampp/htdocs/kissengonews/PHPMailer/src/PHPMailer.php';
-require '/xampp/htdocs/kissengonews/PHPMailer/src/SMTP.php';
+require_once '../PHPMailer/src/Exception.php';
+require_once '../PHPMailer/src/PHPMailer.php';
+require_once '../PHPMailer/src/SMTP.php';
 
 class KissengoController {
 
     private $servico = NULL;
     private $destaques = NULL;
-
+    private $comentario = NULL;
     function __construct() {
         $this->servico = new PublicacaoService();
         $this->destaques = new DestaquesService();
+        $this->comentario = new ComentarioController();
     }
 
     public function login() {
@@ -40,10 +41,14 @@ class KissengoController {
     }
 
     public function validarLogin($email, $senha) {
-        if ($email === 'kissengonews@gmail.com') {
-            if ($senha === 'lucasclaudio') {
+        if ($email === 'geral.lfsport@gmail.com') {
+            if ($senha === 'lf@12342023') {
                 $_SESSION['logado'] = 'sim';
-                header('location: homepage.php');
+                if(!headers_sent()){
+                    header("location: homepage.php");
+                }else{
+                    echo '<script type="text/javascript"> window.location.href="homepage.php"; </script>';
+                }
             } else {
                 echo "<script> alert('SENHA INVÁLIDA'); </script>";
             }
@@ -61,7 +66,7 @@ class KissengoController {
             $file = $_FILES['imagem'];
             $file_name = $file['name'];
             $tmp_name = $file['tmp_name'];
-            $path = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/ficheiros/imagens/';
+            $path = $_SERVER['DOCUMENT_ROOT'] . '/ficheiros/imagens/';
             move_uploaded_file($tmp_name, $path . $file_name); //aqui meti a imagem da publicação numa pasta.
 
             $this->servico->criarPublicacao($titulo, $descricao, $file_name);
@@ -82,7 +87,7 @@ class KissengoController {
         $file = $_FILES['imagem'];
         $file_name = $file['name'];
         $tmp_name = $file['tmp_name'];
-        $path = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/ficheiros/imagens/';
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/ficheiros/imagens/';
         $imagemAntiga = $this->selecionarPublicacaoPeloId($id)->getImagem();
         if (file_exists($path.$imagemAntiga)) {
             if ($file_name === "" || !isset($imagem) || $imagem === NULL) {
@@ -122,7 +127,7 @@ class KissengoController {
 
     public function criarFicheiro($titulo, $html) {
         $pagina = str_replace(" ", "-", $titulo); //aqui estou a criar um arquivo pra nova publicação
-        $fileLocation = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/view/' . $pagina . '.php';
+        $fileLocation = $_SERVER['DOCUMENT_ROOT'] . '/view/' . $pagina . '.php';
         file_put_contents($fileLocation, $html);
     }
 
@@ -130,13 +135,21 @@ class KissengoController {
         $conteudo = file_get_contents($fileLocation);
         unlink($fileLocation);
         $pagina = str_replace(" ", "-", $titulo); //aqui estou a criar um arquivo pra nova publicação
-        $fileLocation = $_SERVER['DOCUMENT_ROOT'] . '/kissengonews/view/' . $pagina . '.php';
+        $fileLocation = $_SERVER['DOCUMENT_ROOT'] . '/view/' . $pagina . '.php';
         file_put_contents($fileLocation, $conteudo);
     }
 
     public function apagarPublicacao($id) {
-        echo "<script> alert('Publicacão apagada com sucesso!'); </script>";
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/ficheiros/imagens/';
+        $imagemAntiga = $this->selecionarPublicacaoPeloId($id)->getImagem();
+        unlink($path . $imagemAntiga);
+        
+        if($this->comentario->quantidadeDeComentarios($id) > 0){
+            $this->comentario->apagarTodosComentariosDaPublicacao($id);    
+        }
+        
         $this->servico->apagarPublicacao($id);
+        echo "<script> alert('Publicacão apagada com sucesso!'); </script>";
     }
 
     public function contacte() {
@@ -153,7 +166,8 @@ class KissengoController {
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
             $mail->setFrom('20200446@isptec.co.ao');
-            $mail->addAddress("kissengonews@gmail.com");
+            //geral.lfsport@gmail.com
+            $mail->addAddress("geral.lfsport@gmail.com");
             $mail->isHTML(true);
             $mail->Subject = "Nome:" . $name . "; Email: $email. Feedback vindo do site desportivo!";
             $mail->Body = $message;

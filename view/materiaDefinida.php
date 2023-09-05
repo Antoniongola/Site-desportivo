@@ -1,12 +1,14 @@
 <?php
-include_once '../controller/kissengocontroller.php';
-include_once '../controller/comentariocontroller.php';
+session_start();
+include_once '../controller/KissengoController.php';
+include_once '../controller/ComentarioController.php';
 $controlador = new KissengoController();
 $comentarioController = new ComentarioController();
 $id = filter_input(INPUT_GET, 'id');
-echo '<title>' . $controlador->tituloDaPaginaDinamica($id) . '</title>';
 include_once 'header.php';
-$comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
+echo '<meta property="og:image" content="https://lfsportlda.000webhostapp.com/ficheiros/imagens/' . $controlador->selecionarPublicacaoPeloId($id)->getImagem() . '" />';
+echo '<title>' . $controlador->tituloDaPaginaDinamica($id) . '</title>';
+$comentarioController->fazerComentario($id);
 ?>
 <section>
     <div class="container " style="margin: 0px;padding: 25px;">
@@ -14,7 +16,7 @@ $comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <img class="img-fluid" src="../ficheiros/imagens/<?php echo $controlador->selecionarPublicacaoPeloId($id)->getImagem(); ?>">
+                        <img class="img-fluid text-center"  src="../ficheiros/imagens/<?php echo $controlador->selecionarPublicacaoPeloId($id)->getImagem(); ?>">
                         <div class="row text-center">
                             <div class="col">
                                 <h1>
@@ -29,8 +31,13 @@ $comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
                         </p>
                     </div>
                 </div>
+                
+                <div class="fb-share-button" data-href="https://lfsportlda.000webhostapp.com/view/materiaDefinida.php?id=<?php echo $id; ?>" data-layout="" data-size=""><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flfsportlda.000webhostapp.com%2Fview%2FmateriaDefinida.php%3Fid%3D<?php echo $id; ?>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partilhar no Facebook</a>
+                </div>
+                
                 <br>
                 <br>
+                
                 <div class="row text-center" style="border-radius: 5%">
                     <div class="col">
                         <div class="bg-light">
@@ -70,7 +77,7 @@ $comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
                                     
                                 </textarea>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group text-center">
                                 <button class="btn btn-primary" type="submit" style="margin-bottom: 15px">
                                     Enviar comentário
                                 </button>
@@ -86,7 +93,7 @@ $comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
                 <?php foreach ($controlador->selecionarTodasPublicacoes() as $publicacao){ ?>
                     <?php if ($publicacao->getId() !== $id){ ?>
                         <div class="row">
-                            <div class="col bg-light card">
+                            <div class="col bg-light card item card">
                                 <div class="card-img">
                                     <img class="img-fluid" src="../ficheiros/imagens/<?php echo $publicacao->getImagem(); ?>" style="margin-top: 12px;">
                                 </div>
@@ -95,7 +102,7 @@ $comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
                                         <a href="materiaDefinida.php?id=<?php echo $publicacao->getId(); ?>"><?php echo $publicacao->getTitulo(); ?></a>
                                     </h3>
                                 </div>
-                                <div class="">
+                                <div class="text-center">
                                     <?php if (isset($_SESSION['logado'])){ ?>
                                         <a href="editarPublicacao.php?id=<?php echo $publicacao->getId(); ?>" >
                                             <button class="btn btn-success" onclick="<?php header('location: editarPublicacao.php'); ?>" type="submit" style="padding: 5px;border-radius: 15px;border-width: 5px;height: 44px;margin-right: 5px;margin-left: 3px;">
@@ -107,6 +114,8 @@ $comentarioController->fazerComentario($_SESSION['idDaMateriaEscolhida']);
                                                 Apagar publicação
                                             </button>
                                         </a>
+                                        <br>
+                                        <br>
                                     <?php } ?>
                                 </div>
                             </div>

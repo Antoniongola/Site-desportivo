@@ -1,5 +1,5 @@
 <?php 
-include_once '../controller/kissengocontroller.php';
+include_once '../controller/KissengoController.php';
 $controlador = new KissengoController();
 ?>
 <section class="projects-clean">

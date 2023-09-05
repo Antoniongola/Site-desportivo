@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once '../controller/kissengocontroller.php';
+include_once '../controller/KissengoController.php';
 $id = filter_input(INPUT_GET, 'id');
 $controlador = new KissengoController();
 $controlador->apagarDestaque($id);

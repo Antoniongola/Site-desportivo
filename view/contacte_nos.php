@@ -1,7 +1,8 @@
-<?php 
-echo '<title>Contacte-nos</title>';
+<?php
+session_start();
 include_once 'header.php';
-include_once '../controller/kissengocontroller.php';
+echo '<title>Contacte-nos</title>';
+include_once '../controller/KissengoController.php';
 $controller = new KissengoController();
 $controller->contacte();
 ?>
@@ -24,4 +25,4 @@ $controller->contacte();
         </div>
     </form>
 </section>
-<?php include_once 'footer.php' ?>
+<?php include_once 'footer.php'; ?>

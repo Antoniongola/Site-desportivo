@@ -11,14 +11,14 @@
  *
  * @author Ngola
  */
-include_once '/xampp/htdocs/kissengonews/model/comentarioservice.php';
-include_once '/xampp/htdocs/kissengonews/model/publicacaoservice.php';
+include_once '../model/ComentarioService.php';
+include_once '../model/PublicacaoService.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once '/xampp/htdocs/kissengonews/PHPMailer/src/Exception.php';
-require_once '/xampp/htdocs/kissengonews/PHPMailer/src/PHPMailer.php';
-require_once '/xampp/htdocs/kissengonews/PHPMailer/src/SMTP.php';
+require_once '../PHPMailer/src/Exception.php';
+require_once '../PHPMailer/src/PHPMailer.php';
+require_once '../PHPMailer/src/SMTP.php';
 
 class ComentarioController {
     //put your code here
@@ -44,7 +44,7 @@ class ComentarioController {
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
             $mail->setFrom('20200446@isptec.co.ao');
-            $mail->addAddress("kissengonews@gmail.com");
+            $mail->addAddress("geral.lfsport@gmail.com");
             $mail->isHTML(true);
             $mail->Subject ='Comentário do(a) '. $name. 'na publicação: ';
             $mail->Body = $comentario;
@@ -59,5 +59,9 @@ class ComentarioController {
     
     public function quantidadeDeComentarios($id){
         return count($this->verTodosComentariosDaPublicacao($id));
+    }
+    
+    public function apagarTodosComentariosDaPublicacao($id){
+        $this->comentarioS->apagarComentariosDaPublicacao($id);
     }
 }

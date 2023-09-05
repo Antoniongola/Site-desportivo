@@ -11,8 +11,8 @@
  *
  * @author Ngola
  */
-require_once 'dbconnection.php';
-require_once 'comentario.php';
+require_once 'DbConnection.php';
+require_once 'Comentario.php';
 class ComentarioRepository {
     private $db;
     
@@ -38,7 +38,6 @@ class ComentarioRepository {
         $comentarios = Array();
         $stmt = $this->db->prepare("SELECT * FROM comentario where fk_publicacao = :id");
         $stmt->bindparam(":id", $id);
-        //$stmt->execute(['id' => $id]);
         $stmt->execute();
         $result = $stmt->fetchAll();
 
@@ -48,4 +47,17 @@ class ComentarioRepository {
         
         return $comentarios;
     }
+    
+    public function deleteAllCommentsOfAPub($id) {
+        try{
+            $stmt = $this->db->prepare("DELETE FROM comentario where fk_publicacao = :id");
+            $stmt->bindparam(":id", $id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+    
 }

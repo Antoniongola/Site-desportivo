@@ -1,10 +1,8 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <!-- <title>KissengoNews</title> -->
         <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/fonts/ionicons.min.css">
@@ -34,7 +32,7 @@
                         </span>
                     <?php } else { ?>
                         <span class="navbar-text actions">
-                            <a class="btn btn-light action-button"  role="button" href="logout.php" >Sair</a>
+                            <a class="btn btn-light action-button" role="button" href="logout.php" >Sair</a>
                         </span>
                     <?php } ?>
                 </div>
@@ -44,6 +42,10 @@
         $pesquisa = filter_input(INPUT_GET, 'pesquisa');
         if (isset($pesquisa)) {
             $_SESSION['pesquisa'] = $pesquisa;
-            header('location: pesquisa.php');
+            if(!headers_sent()){
+                header("location: pesquisa.php");
+            }else{
+                echo '<script type="text/javascript"> window.location.href="pesquisa.php"; </script>';
+            }
         }
         ?>

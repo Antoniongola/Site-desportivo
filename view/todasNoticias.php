@@ -1,6 +1,7 @@
 <?php
-echo '<title>Todas notícias</title>';
+session_start();
 include_once 'header.php';
+echo '<title>Todas notícias</title>';
 include_once 'noticias.php';
 include_once 'footer.php';
 /* 

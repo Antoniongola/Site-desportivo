@@ -1,6 +1,6 @@
 <?php
-include_once '../controller/kissengocontroller.php';
-include_once '../model/destaques.php';
+include_once '../controller/KissengoController.php';
+include_once '../model/Destaques.php';
 $controlador = new KissengoController();
 $contador = 0;
 ?>

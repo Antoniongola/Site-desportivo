@@ -11,8 +11,8 @@
  *
  * @author Ngola
  */
-require_once '/xampp/htdocs/kissengonews/model/dbconnection.php';
-require_once '/xampp/htdocs/kissengonews/model/destaques.php';
+require_once 'DbConnection.php';
+require_once 'Destaques.php';
 
 class DestaquesRepository {
 

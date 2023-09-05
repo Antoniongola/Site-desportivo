@@ -1,6 +1,7 @@
 <?php
+session_start();
 include_once 'header.php';
-include_once '../controller/kissengocontroller.php';
+include_once '../controller/KissengoController.php';
 $controlador = new KissengoController();
 $titulo = filter_input(INPUT_GET, 'pesquisa');
 echo '<title>Busca: ' . $_SESSION['pesquisa'] . ' </title>';

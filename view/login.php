@@ -1,7 +1,8 @@
-<?php 
-echo '<title>Login</title>';
+<?php
+session_start();
 include_once 'header.php'; 
-include_once '../controller/kissengocontroller.php';
+include_once '../controller/KissengoController.php';
+echo '<title>Login</title>';
 $controlador = new KissengoController();
 $controlador->login();
 ?>

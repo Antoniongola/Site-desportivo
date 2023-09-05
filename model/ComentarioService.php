@@ -1,6 +1,6 @@
 <?php
-require_once 'comentariorepository.php';
-require_once 'comentarioservicei.php';
+require_once 'ComentarioRepository.php';
+require_once 'ComentarioServiceI.php';
 class ComentarioService implements ComentarioServiceI {
     private $repository = NULL;
     
@@ -21,6 +21,13 @@ class ComentarioService implements ComentarioServiceI {
             $res = $this->repository->selectAllCommentsOfAPub($id);
             return $res;
         } catch (PDOException $e) {
+        }
+    }
+    
+    public function apagarComentariosDaPublicacao($id){
+        try{
+            return $res = $this->repository->deleteAllCommentsOfAPub($id);
+        } catch (PDOException $e){
         }
     }
 }

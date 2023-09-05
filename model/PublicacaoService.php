@@ -1,6 +1,6 @@
 <?php
-include_once '/xampp/htdocs/kissengonews/model/publicacaorepository.php';
-include_once '/xampp/htdocs/kissengonews/model/publicacaoservicei.php';
+include_once 'PublicacaoRepository.php';
+include_once 'PublicacaoServiceI.php';
 class PublicacaoService implements PublicacaoServiceI{
     private $repository = NULL;
     

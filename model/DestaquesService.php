@@ -11,8 +11,8 @@
  *
  * @author Ngola
  */
-require_once '/xampp/htdocs/kissengonews/model/destaquesrepository.php';
-require_once '/xampp/htdocs/kissengonews/model/destaquesservicei.php';
+require_once 'DestaquesRepository.php';
+require_once 'DestaquesServiceI.php';
 class DestaquesService implements DestaquesServiceI{
     private $repository = NULL;
     

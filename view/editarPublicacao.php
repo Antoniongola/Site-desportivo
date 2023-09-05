@@ -1,7 +1,8 @@
 <?php
+session_start();
 echo '<title>Editar publicação</title>';
 include_once 'header.php';
-include_once '../controller/kissengocontroller.php';
+include_once '../controller/KissengoController.php';
 
 if (!isset($_SESSION['logado'])) {
     header('location: ../index.php');

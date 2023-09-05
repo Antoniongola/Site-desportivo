@@ -1,6 +1,6 @@
 <?php
-include_once '/xampp/htdocs/kissengonews/model/Dbconnection.php';
-include_once '/xampp/htdocs/kissengonews/model/publicacao.php';
+include_once 'DbConnection.php';
+include_once 'Publicacao.php';
 class PublicacaoRepository {
     private $db;
     
@@ -84,3 +84,5 @@ class PublicacaoRepository {
         return $publicacoes;
     }
 }
+
+?>
